@@ -1,0 +1,244 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 33% 4%;
+    --foreground: 220 20% 95%;
+    --card: 240 33% 4%;
+    --card-foreground: 220 20% 95%;
+    --popover: 240 33% 4%;
+    --popover-foreground: 220 20% 95%;
+    --primary: 106 100% 54%;
+    --primary-foreground: 240 33% 4%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 220 20% 95%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 216 12% 50%;
+    --accent: 240 4% 16%;
+    --accent-foreground: 220 20% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 20% 95%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 106 100% 54%;
+    --radius: 0.75rem;
+    --ritual-bg: #0A0A0F;
+    --ritual-glass: rgba(255,255,255,0.04);
+    --ritual-glass-hover: rgba(255,255,255,0.07);
+    --ritual-glass-border: rgba(255,255,255,0.08);
+    --ritual-glass-border-active: rgba(57,255,20,0.2);
+    --ritual-neon: #39FF14;
+    --ritual-neon-dim: rgba(57,255,20,0.15);
+    --ritual-neon-glow: rgba(57,255,20,0.4);
+    --ritual-cyan: #39FF14;
+    --ritual-ice-blue: #86EFAC;
+    --ritual-violet: #22C55E;
+    --ritual-silver: #C8D6E5;
+    --ritual-text-primary: #F0F2F5;
+    --ritual-text-secondary: #8A95A5;
+    --ritual-text-tertiary: #5A6577;
+    --ritual-success: #39FF14;
+    --ritual-pending: #FBBF24;
+  }
+
+  body {
+    background-color: #0A0A0F;
+    color: #F0F2F5;
+    font-family: 'Geist', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  ::selection {
+    background: rgba(57, 255, 20, 0.25);
+    color: #F0F2F5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.04);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ritual-neon);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 255, 20, 0.8);
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--ritual-glass);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid var(--ritual-glass-border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .glass-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .glass-hover:hover {
+    background: var(--ritual-glass-hover);
+    border-color: var(--ritual-glass-border-active);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 20px rgba(57,255,20,0.1), inset 0 1px 0 rgba(57,255,20,0.08);
+  }
+
+  .glass-active:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  .glass-refraction::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(57,255,20,0.2) 50%, transparent 100%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .glass-nav {
+    background: rgba(10,10,15,0.7);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border-bottom: 1px solid rgba(57,255,20,0.08);
+  }
+
+  .glass-strong {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(32px) saturate(1.3);
+    -webkit-backdrop-filter: blur(32px) saturate(1.3);
+    border: 1px solid var(--ritual-glass-border-active);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(57,255,20,0.06);
+  }
+
+  .btn-glass-primary {
+    background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(34,197,94,0.1));
+    border: 1px solid rgba(57,255,20,0.3);
+    color: var(--ritual-text-primary);
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    padding: 0.625rem 1.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .btn-glass-primary:hover {
+    border-color: rgba(57,255,20,0.6);
+    box-shadow: 0 0 25px rgba(57,255,20,0.2), inset 0 0 10px rgba(57,255,20,0.05);
+    transform: translateY(-1px);
+  }
+  .btn-glass-primary:active {
+    transform: scale(0.98);
+  }
+  .btn-glass-primary:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .btn-glass-secondary {
+    background: var(--ritual-glass);
+    border: 1px solid var(--ritual-glass-border);
+    color: var(--ritual-text-primary);
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    padding: 0.625rem 1.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .btn-glass-secondary:hover {
+    background: var(--ritual-glass-hover);
+    border-color: var(--ritual-glass-border-active);
+    box-shadow: 0 0 15px rgba(57,255,20,0.08);
+  }
+  .btn-glass-secondary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-glass-ghost {
+    background: transparent;
+    border: none;
+    color: var(--ritual-text-primary);
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .btn-glass-ghost:hover {
+    background: var(--ritual-glass-hover);
+  }
+
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, var(--ritual-neon), var(--ritual-ice-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-neon {
+    text-shadow: 0 0 30px rgba(57,255,20,0.3), 0 0 60px rgba(57,255,20,0.1);
+  }
+
+  .mono-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    color: var(--ritual-neon);
+  }
+
+  .caption-text {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--ritual-text-tertiary);
+  }
+}
